@@ -1,8 +1,5 @@
 const { REST, Routes } = require('discord.js');
-
-require('dotenv').config()
-const token = process.env.DISCORD_TOKEN
-const clientId = process.env.DISCORD_CLIENT_ID
+const config = require('./config.js');
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -28,19 +25,27 @@ for (const folder of commandFolders) {
 	}
 }
 
-const rest = new REST().setToken(token);
+const rest = new REST().setToken(config.token);
 
-(async () => {
+async function deployCommands() {
 	try {
 		console.log(`[LOG] Started refreshing ${commands.length} application (/) commands`);
 
 		const data = await rest.put(
-			Routes.applicationCommands(clientId),
+			Routes.applicationCommands(config.clientId),
 			{ body: commands },
 		);
 
 		console.log(`[LOG] Successfully reloaded ${data.length} application (/) commands`);
+		return data;
 	} catch (error) {
 		console.error(`[ERROR] ${error}`);
+		throw error;
 	}
-})();
+}
+
+module.exports = deployCommands;
+
+if (require.main === module) {
+	deployCommands();
+}

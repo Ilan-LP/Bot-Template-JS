@@ -1,9 +1,8 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
-
-require('dotenv').config()
-const token = process.env.DISCORD_TOKEN
+const deployCommands = require('./deploy-commands.js');
+const config = require('./config.js');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -26,7 +25,13 @@ for (const folder of commandFolders) {
 	}
 }
 
-client.once(Events.ClientReady, readyClient => {
+client.once(Events.ClientReady, async readyClient => {
+	try {
+		await deployCommands();
+	} catch (error) {
+		console.error('[ERROR] Failed to deploy commands:', error);
+	}
+	
 	console.log(`[LOG] Ready! Logged in as ${readyClient.user.tag}`);
 });
 
@@ -53,4 +58,4 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 
-client.login(token);
+client.login(config.token);
