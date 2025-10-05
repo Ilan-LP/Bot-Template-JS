@@ -16,25 +16,8 @@ module.exports = {
 		const api_latency_text = `${api_latency}ms`;
 
 		const bot_uptime = Math.round(uptime());
-		let bot_uptime_text = `${bot_uptime}s`;
-		if (bot_uptime > 60) {
-			bot_uptime_text = `${Math.floor(bot_uptime / 60)} minutes`;
-		}
-		if (bot_uptime > 3600) {
-			bot_uptime_text = `${Math.floor(bot_uptime / 3600)} hours`;
-		}
-		if (bot_uptime > 86400) {
-			bot_uptime_text = `${Math.floor(bot_uptime / 86400)} days`;
-		}
-		if (bot_uptime > 604800) {
-			bot_uptime_text = `${Math.floor(bot_uptime / 604800)} weeks`;
-		}
-		if (bot_uptime > 2592000) {
-			bot_uptime_text = `${Math.floor(bot_uptime / 2592000)} mounths`;
-		}
-		if (bot_uptime > 31536000) {
-			bot_uptime_text = `${Math.floor(bot_uptime / 31536000)} years`;
-		}
+		let bot_uptime_text = `<t:${Math.floor(Date.now() / 1000) - bot_uptime}:R>`;
+	
 
 		const guilds = await interaction.client.guilds.fetch();
 
@@ -48,7 +31,7 @@ module.exports = {
 		responde_time = Date.now() - responde_time;
 		let responde_time_text = `${responde_time}ms`;
 
-		let component = [
+		const component = [
 			new ContainerBuilder().addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(`### ──┤ Network ├──\nAPI Latency: **${api_latency_text}**\nResponse Time: **${responde_time_text}**\n\n`)
 			).addTextDisplayComponents(
