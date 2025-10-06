@@ -40,7 +40,6 @@ module.exports = {
 				new TextDisplayBuilder().setContent(`### ──┤ Environnement ├──\nGuilds: **${guilds.size}**\nNode.js Version: **${node_version}**\nDiscord.js Version: **${discordjs_version}**`)
 			)
 		];
-		
 		await interaction.reply({ components: component, flags: [MessageFlags.IsComponentsV2] });
 	},
 };
