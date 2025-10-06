@@ -48,7 +48,8 @@ client.on(Events.InteractionCreate, async interaction => {
 	try {
 		await command.execute(interaction);
 	} catch (error) {
-		console.error(error);const component = [
+		console.error(error);
+		const component = [
 			new ContainerBuilder().addTextDisplayComponents(
 				new TextDisplayBuilder().setContent(`### ──┤ Error ├──\nThere was an error while executing this command!`)
 			)

@@ -8,14 +8,13 @@ module.exports = {
 		if (!interaction.guild) {
 			const component = [
 				new ContainerBuilder().addTextDisplayComponents(
-					new TextDisplayBuilder().setContent(`This command can only be used in a server`)
+					new TextDisplayBuilder().setContent(`### ──┤ Error ├──\nThis command can only be used in a server`)
 				)
 			];
 
             await interaction.reply({ components: component, flags: [MessageFlags.IsComponentsV2] });
             return;
         }
-
 		const server_name = interaction.guild.name;
 		let server_creation = interaction.guild.createdAt;
 		server_creation = `<t:${Math.floor(server_creation.getTime() / 1000)}:R>`;
