@@ -22,7 +22,7 @@ module.exports = {
 
 		const component = [
 			new ContainerBuilder().addTextDisplayComponents(
-				new TextDisplayBuilder().setContent(`### ──┤ User info ├──\nName: **${user_name}**\nTag: **${user_tag}**\nCreation: ${user_creation}\nId: **${user_id}**\nBot: **${user_bot}**\n\n`)
+				new TextDisplayBuilder().setContent(`### ──┤ User info ├──\nName: **${user_name}**\nTag: **${user_tag}**\nCreation: **${user_creation}**\nBot: **${user_bot}**\nId: **${user_id}**\n\n`)
 			)
 		];
 
